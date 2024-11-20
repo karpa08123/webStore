@@ -1,0 +1,36 @@
+use panGo
+
+db.usuarios.insert({
+  "username":"test",
+  "mail":"mail@test.com",
+  "nombre":"TestName",
+  "apellido":"TestLastName",
+  "password":"TestPassword",
+  "direccion":"TestAdress",
+  "noCel":555555555
+  })
+
+db.producto.insert({
+  "marca":"testBrand",
+  "nombre":"testName",
+  "precio":99,
+  "existencias":99,
+  "descripcion":"TestDescription"
+  })
+
+db.ventas.insert({
+  "producto":"testProduct",
+  "cantidad":99,
+  "montoTotal":99,
+  "idUsuario":"testId",
+  "direccionUsuario":"TestAdress",
+  "factura":"testIdFactura"
+  })
+
+db.logs.insert({
+  "fecha":15/11/2024,
+  "tipoEvento":"testEvent",
+  "usuario":"testUser",
+  "detalles":"testDetails",
+  "status":"test"
+  })
