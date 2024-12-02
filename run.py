@@ -197,6 +197,54 @@ def checkout():
     crud.createOneDoc(db,'xml',xml)
     print('xml generado!!!!!!!')
 
+    xmlInfo = crud.readDoc(db,'xml',{'generales':xmlGenerales})
+    xmlInfo = crud.clearFormat(xmlInfo)
+
+    import xml.etree.ElementTree as ET
+
+    genXml = ET.Element('Venta')
+    generales = ET.SubElement(genXml,'Datos Generales')
+    folio = ET.SubElement(generales, 'Folio')
+    folio.text = str(xmlInfo['generales']['folio'])
+    version = ET.SubElement(generales,'Version')
+    version.text = str(4)
+    noVenta = ET.SubElement(generales,'Numero de Venta')
+    noVenta.text = str(xmlInfo['generales']['noDeVenta'])
+    fechaEmision = ET.SubElement(generales,'Fecha de Emision')
+    fechaEmision.text = str(xmlInfo['generales']['fechaEmision'])
+    expedicion = ET.SubElement(generales,'Lugar de Expedicion')
+    expedicion.text = str(xmlInfo['generales']['lugarExpedicion'])
+
+    xmlDataVenta = ET.SubElement(genXml,'Datos de Venta')
+    articulos = ET.SubElement(xmlDataVenta, 'Articulos')
+
+    articulos.text = str(productos)
+
+    subTotal = ET.SubElement(xmlDataVenta, 'SubTotal')
+    subTotal.text = str(xmlInfo['venta']['subTotal'])
+    totalIva = ET.SubElement(xmlDataVenta,'Total IVA')
+    totalIva.text = str(xmlInfo['venta']['totalIva'])
+    pago = ET.SubElement(xmlDataVenta, 'Metodo de Pago')
+    pago.text = str(xmlInfo['venta']['metodoPago'])
+
+    vendedorXml = ET.SubElement(genXml,'Datos del Vendedor')
+    rfcVendedor = ET.SubElement(vendedorXml, 'RFC del Vendedor')
+    rfcVendedor.text = str(xmlInfo['vendedor']['rfc'])
+    nombreVendedor = ET.SubElement(vendedorXml,'Nombre del Vendedor')
+    nombreVendedor.text = str(xmlInfo['vendedor']['nombre'])
+
+    compradorXml = ET.SubElement(genXml, 'Datps del Comprador')
+    rfcComprador = ET.SubElement(compradorXml, 'RFC del Comprador')
+    rfcComprador.text = str(xmlInfo['comprador']['rfc'])
+    nombreComprador = ET.SubElement(compradorXml,'Nombre del Comprador')
+    nombreComprador.text = str(xmlInfo['comprador']['nombre'])
+    domicilioComprador = ET.SubElement(compradorXml, 'Domicilio del Comprador')
+    domicilioComprador.text = str(xmlInfo['comprador']['domicilio'])
+
+    ET.indent(genXml)
+    et = ET.ElementTree(genXml)
+    et.write("xml.xml", xml_declaration=True)
+
     return render_template("checkout.html")
 
 if __name__ == '__main__':

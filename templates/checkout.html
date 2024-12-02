@@ -1,1 +1,14 @@
-<h1>Venta hecha?</h1>
+
+{% extends 'base.html' %}
+{% block title %}
+Venta realizada
+{% endblock %}
+
+{% block content %}
+<div class="card" style="width: 20rem;">
+    <h3>Venta concluida exitosamente</h3>
+    <div class="card-body">
+        <a type="button" class="btn btn-primary" href="{{url_for('index')}}">Volver al inicio</a>
+    </div>
+</div>
+{% endblock content %}
