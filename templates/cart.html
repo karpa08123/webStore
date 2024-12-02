@@ -2,34 +2,56 @@
 {% block title %}
 carrito
 {% endblock title %}
-
 {% block content %}
 <!-- Articles -->
-             <!-- Nota: Hacer 4 articulos por fila?-->
-            <div class="row">
-                <!-- Column -->
-                <div class="col-8">
-                    <div class="container-fluid">
-                    <div class="row align-items-start">
-                        <div class="col-md-2"><img src="/static/img/sampleCart.png" width="80" height="80"></div> <!-- Ajustar tamanio imagen -->
-                        <div class="col-md-6">
-                            <a>Nombre del articulo</a>
-                        </div>
-                        <div class="col-md-2">Precio</div>
-                        <div class="col-md-2"><a type="button" class="btn btn-secondary">Borrar</a></div>
-                    </div>
-                    </div>
-                </div>
-                <!-- End Article -->
-                <div class="col-4">
-                    <h5>Resumen de compra</h5>
-                    <hr>
-                    <p>Producto $XXX</p>
-                    <p>Envio Gratis</p>
-                    <hr>
-                    <a type="button" class="btn btn-success">Comprar</a>
-                </div>
-                <!-- Fin Column-->
+<div class="row">
+    <!-- Column -->
+    <div class="col-8">
+        <div class="container-fluid">
+        <div class="row align-items-start">
+            <div class="col-md-2"></div> <!-- Ajustar tamanio imagen -->
+            <div class="col-md-6">
+                <a>Nombre</a>
             </div>
-            <!-- End Articles -->
+            <div class="col-md-2">Precio</div>
+            <div class="col-md-2">Cantidad</div>
+            <div class="col-md-2"></div>
+        </div>
+        {% for i in range(0, largo, 1) %}
+        <div class="row align-items-start">
+            <div class="col-md-2"><img src="/static/img/sampleCart.png" width="80" height="80"></div> <!-- Ajustar tamanio imagen -->
+            <div class="col-md-6">
+                <a>{{bigData[i]['nombre']}}</a>
+            </div>
+            <div class="col-md-2">{{bigData[i]['precio']}}</div>
+            <div class="col-md-2">{{littleData[i]['quantity']}}</div>
+            <div class="col-md-2"><a type="button" class="btn btn-secondary" disabled>Borrar</a></div>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+    <!-- End Article -->
+    <div class="col-4">
+        <h5>Resumen de compra</h5>
+        <hr>
+        <p>Productos ${{sumatoria}}</p>
+        <p>Envio Gratis</p>
+        <p>total mas IVA: ${{IVA}}</p>
+        <hr>
+        <form method="POST" action="/checkout">
+            {% for j in range(0,largo,1) %}
+            <input type="hidden" name="products[{{ j }}][id]" value="{{ bigData[j]['_id'] }}">
+            <input type="hidden" name="products[{{ j }}][name]" value="{{ bigData[j]['nombre'] }}">
+            <input type="hidden" name="products[{{ j }}][price]" value="{{ bigData[j]['precio'] }}">
+            <input type="hidden" name="products[{{ j }}][discount]" value="{{ bigData[j]['descuento'] }}">
+            <input type="hidden" name="products[{{ j }}][quantity]" value="{{ littleData[j]['quantity'] }}">
+            {% endfor %}
+            <input type="hidden" name="total" value="{{ sumatoria }}">
+            <input type="hidden" name="iva" value="{{IVA}}">
+            <button type="button submit" class="btn btn-success">Comprar</button>
+        </form>
+    </div>
+    <!-- Fin Column-->
+</div>
+<!-- End Articles -->
 {% endblock content %}

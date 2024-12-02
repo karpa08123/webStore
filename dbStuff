@@ -19,15 +19,21 @@ db.producto.insertOne({
   "descuento":0
   })
 
-db.ventas.insertOne({
-  "idUsuario":"testID",
-  "domicilioUsuario":"TestAdress",
-  "idArticulo":"TestID",
-  "cantidad":0,
-  "subtotal":0,
-  "metodoDePago":"TestMethod",
-  "descuento":0
-  })
+  db.ventas.insert({
+    'idUsuario':'testId',
+    'domicilio':'testDomicilio',
+    'articulos':{
+        1:{
+            'idArticulo':'testId',
+            'cantidad':0,
+            'precio':0,
+            'descuento':0.0,
+        }
+    },
+    'subtotal':0,
+    'metodoPago':'efectivo',
+    'totalIva':0
+})
 
 db.logs.insertOne({
   "fecha":15/11/2024,
@@ -38,20 +44,37 @@ db.logs.insertOne({
   })
 
 db.xml.insertOne({
-  "version":"4.0",
-  "idVenta":"testId",
-  "fechaEmision":01/01/2000,
-  "articulo":"testArticleId",
-  "cantidad":0,
-  "descuento":0,
-  "subtotal":0,
-  "metodoDePago":"testMethod",
-  "rfcVendedor":"testRfc",
-  "nombreVendedor":"testName",
-  "rfcComprador":"testRfcComprador",
-  "nombreComprador":"testNombreComprador",
-  "domicilioComprador":"testDomicilioComprador"
-  })
+    'generales':{
+        'folio':ObjectId(),
+        'version':4.0,
+        'noDeVenta':ObjectId(),
+        'fechaEmision':Date(),
+        'lugarExpedicion': 'domicilioTest',
+    },
+    'venta':{
+        'articulos':{
+            1:{
+                'idArticulo':'testId',
+                'cantidad':0,
+                'precio':0,
+                'descuento':0.0,
+            }
+        },
+        
+        'subTotal': 5,
+        'totalIva': 5.8,
+        'metodoPago': 'efectivo'
+    },
+    'vendedor':{
+        'rfc': 'testRFC',
+        'nombre': 'testSeller'
+    },
+    'comprador':{
+        'rfc': 'testRFC1',
+        'nombre': 'testBuyier',
+        'domicilio': 'testBuyierAdress'
+    }
+})
 
 
 
