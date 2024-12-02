@@ -1,36 +1,99 @@
 use panGo
 
-db.usuarios.insert({
+db.usuarios.insertOne({
   "username":"test",
   "mail":"mail@test.com",
   "nombre":"TestName",
   "apellido":"TestLastName",
   "password":"TestPassword",
   "direccion":"TestAdress",
-  "noCel":555555555
+  "rfc":"testRFC"
   })
 
-db.producto.insert({
+db.producto.insertOne({
   "marca":"testBrand",
   "nombre":"testName",
   "precio":99,
   "existencias":99,
-  "descripcion":"TestDescription"
+  "descripcion":"TestDescription",
+  "descuento":0
   })
 
-db.ventas.insert({
-  "producto":"testProduct",
-  "cantidad":99,
-  "montoTotal":99,
-  "idUsuario":"testId",
-  "direccionUsuario":"TestAdress",
-  "factura":"testIdFactura"
+db.ventas.insertOne({
+  "idUsuario":"testID",
+  "domicilioUsuario":"TestAdress",
+  "idArticulo":"TestID",
+  "cantidad":0,
+  "subtotal":0,
+  "metodoDePago":"TestMethod",
+  "descuento":0
   })
 
-db.logs.insert({
+db.logs.insertOne({
   "fecha":15/11/2024,
   "tipoEvento":"testEvent",
   "usuario":"testUser",
   "detalles":"testDetails",
   "status":"test"
   })
+
+db.xml.insertOne({
+  "version":"4.0",
+  "idVenta":"testId",
+  "fechaEmision":01/01/2000,
+  "articulo":"testArticleId",
+  "cantidad":0,
+  "descuento":0,
+  "subtotal":0,
+  "metodoDePago":"testMethod",
+  "rfcVendedor":"testRfc",
+  "nombreVendedor":"testName",
+  "rfcComprador":"testRfcComprador",
+  "nombreComprador":"testNombreComprador",
+  "domicilioComprador":"testDomicilioComprador"
+  })
+
+
+
+db.producto.insertMany([
+  {
+  "marca":"Esperanza",
+  "nombre":"Concha de chocolate",
+  "precio":8,
+  "existencias":15,
+  "descripcion":"Pan concha de chocolate",
+  "descuento":0
+  },
+  {
+  "marca":"Esperanza",
+  "nombre":"Concha de chocolate premium",
+  "precio":20,
+  "existencias":5,
+  "descripcion":"Pan concha de chocolate, hecho con mantequilla y con costra en toda la parte superior",
+  "descuento":0
+  },
+  {
+  "marca":"Lecaroz",
+  "nombre":"Cuernito",
+  "precio":7,
+  "existencias":25,
+  "descripcion":"Pan cuernito. Comunmente utilizado para hacer sandwiches",
+  "descuento":0
+  },
+  {
+  "marca":"Globo",
+  "nombre":"Rosca de reyes",
+  "precio":200,
+  "existencias":10,
+  "descripcion":"Rosca de nata con costra de concha, ate, e higos",
+  "descuento":0
+  },
+  {
+  "marca":"Globo",
+  "nombre":"Pay de elote",
+  "precio":25,
+  "existencias":10,
+  "descripcion":"Pay chico, individual. Sabor elote",
+  "descuento":0
+  }
+])

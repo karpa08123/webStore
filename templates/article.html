@@ -1,72 +1,30 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Articulo</title>
-    <!-- Imports CSS-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- End Imports CSS-->
-</head>
-<body>
-    <header class="position-fixed-top">
-        <nav class="navbar bg-body-tertiary">
-            <div class="container-fluid">
-                <!-- Logo -->
-                <a class="navbar-brand" href="kioskTerminal.html">
-                    <img src="./../static/img/cuernitoIcono.ico" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"><!-- IMPORTANTE PONER LOGO -->
-                    PanGo
-                </a>
-                <!-- Buscador -->
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Buscar articulo" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Buscar</button>
-                </form>
-                <a type="button" class="btn btn-secondary">Iniciar sesion</a>
-            </div>
-        </nav>
-    </header>
-    
-    <!-- Body -->
-    <div class="body">
-        <div class="container">
-            <!-- Article -->
-            <div class="row">
-                    <h2>{{articleName}}</h2>
-                <div class="col-md-4">
-                <img src="./../img/sampleCart.png">
-                </div>
-                <div class="col-md-4 ms-auto">
-                    <!-- Descripcion articulo -->
-                    <p>{{articleDescription}}</p>
-                </div>
-            </div>
-            <!-- End Article -->
-             <!-- More articles -->
-            <div class="row">
-                <!-- Column -->
-                <div class="col">
-                    <article class="ShowProduct">
-                        <button>
-                        <div class="card" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <p class="card-text"></p>
-                                <h5 class="card-title">$999</h5>
-                                
-                            </div>
-                        </div>
-                        </button>
-                    </article>
-                </div>
-                <!-- Fin Column-->
-            </div>
-        </div>
-    </div>
-    <!-- End Body-->
+{%  extends 'base.html'%}
+{%  block title %}
+Articulo
+{% endblock %}
+{% block content %}
+{% from "_macro.html" import selling %}
 
-    <!-- Imports JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <!-- End Imports JS -->
-</body>
-</html>
+<div class="row">
+        <h2>{{articulo['nombre']}}</h2>
+    <div class="col-md-4">
+    <img src="/static/img/sampleCart.png">
+    </div>
+    <div class="col-md-4 ms-auto">
+        <!-- Descripcion articulo -->
+        <p>{{articulo['descripcion']}}</p>
+        <hr>
+        <div class="hstack gap-3">
+                <div class="p-2 ms-auto"><h3>${{articulo['precio']}}</h3></div>
+                <div class="p-2">
+                    <form id="sellingForm" method="POST">
+                    {{ selling(form.quantity, type="number", min="1", max="99", value="1") }}
+                </div>
+            <div class="vr"></div>
+                <div class="p-2"><button type="button submit" class="btn btn-primary btn-lg" href="{{url_for('index')}}">Agregar al carrito</button></div>
+            </div>
+            {{selling(form.articleId, type="hidden", value=articulo['_id'])}}
+        </form>
+        </div>
+</div>
+{% endblock content %}

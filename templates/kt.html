@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% block title %}
+PanGo
+{% endblock %}
+{% block content %}
+<!-- Articles -->
+    <!-- Nota: Hacer 4 articulos por fila?-->
+{% for i in range(0, largo, 1) %}
+<div class="row">
+    <!-- Column -->
+        <div class="col">
+            <article class="ShowProduct">
+                <a type="button" class="btn" href="/article/{{article[i]['_id']}}">
+                <div class="card" style="width: 18rem;">
+                    <img src="/static/img/sampleCart.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">{{article[i]['nombre']}}</p>
+                        <h5 class="card-title">{{article[i]['precio']}}</h5>
+                        
+                    </div>
+                </div>
+                </a>
+            </article>
+        </div>
+        <!-- Fin Column-->
+</div>
+{% endfor %}
+<!-- End Articles -->
+{% endblock content %}

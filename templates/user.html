@@ -7,7 +7,7 @@ PanGo
 {% from "_macro.html" import register %}
 
 <div class="card" style="width: 20rem;">
-    <h3>Registrarse</h3>
+    <h3>Cambiar datos</h3>
     <div class="card-body">
         <form name="registerNewUser" id="registerForm" method="POST">
             <label for="inputPassword5" class="form-label">Nombre de usuario</label>
@@ -36,7 +36,7 @@ PanGo
 
             <button type="button submit" class="btn btn-success">Registrarse</button>
         </form>
-        <a type="button" class="btn btn-primary" href="{{url_for('login')}}">Iniciar sesion</a>
+        <a type="button" class="btn btn-danger" href="{{ url_for('logout') }}" >Logout</a>
     </div>
 </div>
 
