@@ -245,6 +245,7 @@ def checkout():
     et = ET.ElementTree(genXml)
     et.write("xml.xml", xml_declaration=True)
 
+    session.pop('carrito', None)
     return render_template("checkout.html")
 
 if __name__ == '__main__':
