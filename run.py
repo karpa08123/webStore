@@ -144,7 +144,7 @@ def checkout():
 
     userdata = crud.readDocById(db,'usuarios',session['id'])
     userdata = crud.clearFormat(userdata)
-    vendedorData = crud.readDocById(db,'usuarios','674d806dbb06e34cda70056c')
+    vendedorData = crud.readDocById(db,'usuarios','67d226ad1b9c92021ffad9e0')
     vendedorData = crud.clearFormat(vendedorData)
 
     venta = {
